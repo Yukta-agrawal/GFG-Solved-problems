@@ -34,20 +34,31 @@ class Solution
     {
         // Code here
         int n = s.length();
-        List<String> ls = new ArrayList<>();
-        for(int num=1 ; num< (1<<n) ; num++){
-            
-            String r = "";
-            for(int i=0 ; i<n ; i++){
-                if((num & (1<<i)) !=0 ){
-                    r = r + s.charAt(i);
-                }
-            }
-            
-            ls.add(r);
-            
+        List<String> ans = new ArrayList<>();
+       String s1 = "";
+        helper(0 , ans , s , s1);
+        
+        Collections.sort(ans);
+        return ans;
+    }
+    
+    
+     public void helper(int index , List<String> ans , String s ,String s1){
+         
+        if(index == s.length()){
+            if(s1!="") ans.add(s1);
+            return;
         }
-        Collections.sort(ls);
-        return ls;
+        
+
+        //take
+    
+        helper(index+1 , ans , s , s1 + s.charAt(index));
+       
+        
+        //not take
+        helper(index+1 , ans , s , s1);
+        
+        
     }
 }
