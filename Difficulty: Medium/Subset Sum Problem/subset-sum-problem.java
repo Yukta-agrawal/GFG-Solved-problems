@@ -35,35 +35,47 @@ class GFG
 
 class Solution{
 
-
     static Boolean isSubsetSum(int N, int arr[], int sum){
         // code here
-        int dp[][] = new int[N][sum+1];
-        for(int[] row: dp){
-            Arrays.fill(row , -1);
+        int[][] dp = new int[N][sum+1] ;
+        for (int i = 0; i < N; i++) {
+            Arrays.fill(dp[i], -1);
         }
-        return helper(N-1 , sum , arr , dp) ;
+        int r=helper(N-1 , arr , sum , dp);
+        if(r==0){
+            return false;
+        }
+        else{
+            return true;
+        }
+        
     }
     
-    public static Boolean helper(int  ind , int tar , int[] arr , int[][] dp){
+    public static int helper(int index , int arr[], int sum , int[][] dp ){
         
-        if(tar == 0) return true;
-        if(ind == 0) return (arr[0] == tar);
-        
-        if(dp[ind][tar] != -1 ){
-            return dp[ind][tar] == 1 ? true : false ;
+        if(index==0){
+            if(arr[0]==sum)
+                return 1 ;
+            else
+                return 0;
         }
         
-        Boolean ntake = helper(ind-1 , tar , arr , dp);
-        Boolean take = false;
-        
-        if(tar >= arr[ind]){
-            take = helper(ind - 1 , tar - arr[ind] , arr , dp);
+        if(sum==0){
+            return 1;
         }
         
-        dp[ind][tar] = (take || ntake) ? 1 : 0 ;
-        return take || ntake ;
+        if(dp[index][sum] != -1){
+            return dp[index][sum];
+        }
+        
+        
+        
+        int nottake = helper(index-1 , arr , sum ,dp );
+        int take =0;
+        if(sum-arr[index]>=0) take = helper(index-1 , arr , sum-arr[index], dp);
+        
+        
+        dp[index][sum] = (take | nottake) ;
+        return dp[index][sum];
     }
-    
-    
 }
