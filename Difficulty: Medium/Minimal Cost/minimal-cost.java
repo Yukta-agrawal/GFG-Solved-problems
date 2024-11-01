@@ -12,10 +12,15 @@ class Solution {
     public int minimizeCost(int k, int arr[]) {
         // code here
         int dp[] = new int[arr.length];
-        Arrays.fill(dp , -1);
-        
-        return helper(arr.length-1 , k , arr , dp);
-        
+        dp[0] =  0;
+        for(int i=1 ;  i<arr.length ; i++){
+            int min = (int)10e9 ;
+            for(int j = 1 ; i-j>=0 && j<=k ; j++){
+                min = Math.min( min , dp[i-j] + Math.abs(arr[i] - arr[i-j]) );
+            }
+           dp[i] = min;
+        }
+        return dp[arr.length-1] ;
     }
     
     public int helper(int i , int k, int arr[] , int[] dp){
