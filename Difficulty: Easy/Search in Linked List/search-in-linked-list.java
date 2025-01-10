@@ -12,8 +12,9 @@ class Node {
         data = x;
         next = null;
     }
+}
 
-} class GFG {
+class GFG {
     public static void main(String args[]) throws IOException {
         Scanner sc = new Scanner(System.in);
         int t = sc.nextInt();
@@ -28,9 +29,11 @@ class Node {
             int key = sc.nextInt();
             Solution g = new Solution();
             boolean ans = g.searchKey(n, head, key);
-            System.out.println(ans ? "1" : "0");
+            System.out.println(ans ? "true" : "false");
             // printList(head);
             t--;
+
+            System.out.println("~");
         }
     }
 }
@@ -48,17 +51,16 @@ class Node {
 */
 class Solution {
     static boolean searchKey(int n, Node head, int key) {
-        // Code here
+        // Code here\
+        Node mover = head;
         
-        Node mover = head ;
-        
+        if(head==null) return false;
         while(mover!=null){
             if(mover.data == key){
                 return true;
             }
             mover = mover.next;
         }
-        
         return false;
     }
 }
