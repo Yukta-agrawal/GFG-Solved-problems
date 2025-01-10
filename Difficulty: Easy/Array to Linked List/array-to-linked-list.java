@@ -37,7 +37,9 @@ class GFG {
                 ans = ans.next;
             }
             System.out.println();
-        }
+        
+System.out.println("~");
+}
         scanner.close();
     }
 }
@@ -61,13 +63,18 @@ class Node {
 class Solution {
     static Node constructLL(int arr[]) {
         // code here
+        
+        
         Node head = new Node(arr[0]);
-        Node mover = head ;
+        Node mover = head;
         for(int i = 1 ; i< arr.length ; i++){
+            
             Node temp = new Node(arr[i]);
             mover.next = temp;
             mover = temp;
         }
+        
         return head;
+        
     }
 }
